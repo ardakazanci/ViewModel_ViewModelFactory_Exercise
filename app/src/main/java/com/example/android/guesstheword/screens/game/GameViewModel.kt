@@ -5,6 +5,11 @@ import androidx.lifecycle.ViewModel
 
 class GameViewModel : ViewModel() {
 
+    /**
+     * Logic işlemler ViewModel içerisinde yapılıyor.
+     * Refresh işlemleri için 2 taraftada yapılıyor.
+     */
+
     init {
         Log.i("GameViewModel", "GameViewModel Created")
         resetList()
