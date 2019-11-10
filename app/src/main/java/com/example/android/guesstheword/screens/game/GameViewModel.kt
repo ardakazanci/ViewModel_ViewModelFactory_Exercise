@@ -17,6 +17,11 @@ class GameViewModel : ViewModel() {
     val score: LiveData<Int> // Readable - encapsulated
         get() = _score // Getter
 
+    // GameFinished LiveData
+    private val _eventGameFinished = MutableLiveData<Boolean>()
+    val eventGameFinished: LiveData<Boolean>
+        get() = _eventGameFinished
+
 
     /**
      * Logic işlemler ViewModel içerisinde yapılıyor.
@@ -80,6 +85,8 @@ class GameViewModel : ViewModel() {
         if (!wordList.isEmpty()) {
             //Select and remove a word from the list
             _word.value = wordList.removeAt(0)
+        } else if (wordList.isEmpty()) {
+            onGameFinished()
         }
 
     }
@@ -99,6 +106,14 @@ class GameViewModel : ViewModel() {
             _score.value = (score.value)?.plus(1)
         }
         nextWord()
+    }
+
+    fun onGameFinished() {
+        _eventGameFinished.value = true
+    }
+
+    fun onGameFinishComplete() {
+        _eventGameFinished.value = false
     }
 
 }

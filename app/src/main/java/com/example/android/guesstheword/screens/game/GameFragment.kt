@@ -67,6 +67,10 @@ class GameFragment : Fragment() {
             binding.wordText.text = it
         })
 
+        viewModel.eventGameFinished.observe(this, Observer {
+            if (it) onGameFinished()
+        })
+
 
         // Inflate view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(
@@ -121,6 +125,14 @@ class GameFragment : Fragment() {
         // Şuraya git.
         // UI Davranışı. Logic yok.
         NavHostFragment.findNavController(this).navigate(action)
+
+        /**
+         * Eğer eklenmez ise, Yapılandırma durumlarında her defaısnda tekrar tekrar Toast Mesajı görüntülenir.
+         * Çünkü tekrar işleme konulur.
+         */
+        viewModel.onGameFinishComplete()
+
     }
+
 
 }
